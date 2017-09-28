@@ -36,12 +36,12 @@ import UIKit
     //func drawHorizontalLine (from startX: Double, toEndX: Double, using color: UIColor){
     var displayValue: Double{
         get{
-            return ouble(display.text()
+            return Double(display.text!)!
         }
         set{
-            
+            display.text = String(newValue)
         }
-    }
+    } // computed property
     
     @IBAction func performOperation(sender: UIButton) {
         userIsInTheMiddleOfTyping = false
@@ -49,10 +49,12 @@ import UIKit
         {
             switch mathematicalSymbol{
             case "π":
-                display.text = String(M_PI)
+                //display.text = String(M_PI)
+                displayValue = M_PI
             case "√" :
-                let operand = Double(display.text!)!
-                display.text = String(sqrt(operand))
+                //let operand = Double(display.text!)!
+                //display.text = String(sqrt(operand))
+                displayValue = sqrt(displayValue)
             default:
                 break
                 //crtl I to indent fix
