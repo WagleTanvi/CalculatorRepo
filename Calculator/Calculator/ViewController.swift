@@ -5,7 +5,7 @@
 //  Created by Tanvi Wagle on 9/14/17.
 //  Copyright © 2017 Tanvi Wagle. All rights reserved.
 //
-
+// alt click means bring it up on the right
 import UIKit
 
  class ViewController: UIViewController { // declaration of class
@@ -42,23 +42,18 @@ import UIKit
             display.text = String(newValue)
         }
     } // computed property
+    private  var brain = CalculatorBrain()
     
     @IBAction func performOperation(sender: UIButton) {
-        userIsInTheMiddleOfTyping = false
-        if let mathematicalSymbol = sender.currentTitle
-        {
-            switch mathematicalSymbol{
-            case "π":
-                //display.text = String(M_PI)
-                displayValue = M_PI
-            case "√" :
-                //let operand = Double(display.text!)!
-                //display.text = String(sqrt(operand))
-                displayValue = sqrt(displayValue)
-            default:
-                break
-                //crtl I to indent fix
-            }
+        if userIsInTheMiddleOfTyping {
+            brain.setOperand(displayValue)
+            userIsInTheMiddleOfTyping = false
+        }
+        if let mathematicalSymbol = sender.currentTitle{
+            brain.performOperation(mathematicalSymbol)
+        }
+        if let result = brain.result{
+            displayValue = result
         }
     }
 
